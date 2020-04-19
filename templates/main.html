@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Введите данные и узнайте историю участника ВОВ</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.surname.label }}<br>
+        {{ form.surname(class="form-control") }}<br>
+        {% for error in form.surname.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+        {% endfor %}
+    <p>
+        {{ form.name.label }}<br>
+        {{ form.name(class="form-control") }}<br>
+        {% for error in form.name.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    <p>
+        {{ form.fathername.label }}<br>
+        {{ form.fathername(class="form-control") }}<br>
+        {% for error in form.fathername.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <input value="Поиск" type="button" class="btn btn-danger" onclick="location.href='people_info'">
+    <input value="Смотреть полный список" type="button" class="btn btn-danger" onclick="location.href='all_members'">
+    <p>
+    <h5>Войти как администратор</h5>
+    <p>Логин<p>
+    <input type="email" size="45">
+    <p>Пароль<p>
+    <input type="password" size="45">
+    <p>
+    <input value="Войти" type="button" size="1" class="btn btn-danger" onclick="location.href='admin'">
+
+{% endblock %}
