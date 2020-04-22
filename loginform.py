@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
-from flask import redirect, render_template, Flask, url_for
+from flask import redirect, render_template, Flask, url_for, request
 import sqlalchemy.orm as orm
 from sqlalchemy.orm import Session
 from data import db_session, users
@@ -25,7 +25,8 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    return render_template('main.html', title='Поиск участников войны', form=form)
+    if request.method == 'GET':
+        return render_template('main.html', title='Поиск участников войны', form=form)
 
 
 @app.route('/people_info', methods=['GET'])
@@ -41,9 +42,12 @@ def all_members():
     return '<br>'.join(NAMES)
 
 
-@app.route('/admin', methods=['GET'])
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    return 'войти сможет только администратор, который сможет добавлять новые данные'
+    form = LoginForm()
+    if form.password.data == 'олеся' and form.login.data == 'ol':
+        return 'неверно'
+    return 'верно'
 
 
 if __name__ == '__main__':
