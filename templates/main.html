@@ -2,18 +2,21 @@
 
 {% block content %}
 <h1>Введите данные и узнайте историю участника ВОВ</h1>
-<form action="" method="post" novalidate>
+<form method="post" action="people_info">
     {{ form.hidden_tag() }}
     <h5>Фамилия</h5>
-    <input id="surname" size="100" type="text" onkeyup="checkParamsforpeople()">
+    <input id="surname" name="surname" size="100" type="text" onkeyup="checkParamsforpeople()">
     <h5>Имя</h5>
-    <input id='name' type="text" size="100" onkeyup="checkParamsforpeople()">
+    <input id="name" name='name' type="text" size="100" onkeyup="checkParamsforpeople()">
     <h5>Отчество</h5>
-    <input id="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+    <input id="fathername" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
     <p>
-        <p>
-    <input id="find"  value="Поиск" type="button" class="btn btn-danger" disabled="disabled" onclick="location.href='people_info'">
     </p>
+    <input id="find" value="Поиск" type="submit"
+           class="btn btn-danger" disabled="disabled" onclick="location.href='people_info'">
+    <p>
+    </p>
+    </form>
         <script>
     function checkParamsforpeople() {
     var inp1 = document.getElementById('surname'),
@@ -22,13 +25,18 @@
     document.getElementById('find').disabled = inp1.value && inp2.value && inp3.value ? false : "disabled";
     }
 </script>
-    <input value="Смотреть полный список" type="button" class="btn btn-danger" onclick="location.href='all_members'">
+<form method="post" action="all_members">
+    <input value="Смотреть полный список" type="submit" id="all_people"
+           class="btn btn-danger" onclick="location.href='all_members'">
+    </form>
     <p>
     <h5>Войти как администратор</h5>
     <h6>Логин</h6>
-    <input id='email' class="form-control" type="email" size="45" onkeyup="checkParams()">
+    <input id='email' name="email" class="form-control" placeholder="Введите логин" formmethod="post"
+           type="email" size="45" onkeyup="checkParams()">
     <h6>Пароль</h6>
-    <input id="password" class="form-control" type="password" size="45" onkeyup="checkParams()">
+    <input id="password" formmethod="post" name="password" class="form-control" placeholder="Введите пароль"
+           type="password" size="45" onkeyup="checkParams()">
     <p>
     <script>
     function checkParams() {
@@ -37,7 +45,8 @@
     document.getElementById('come_in').disabled = inp1.value && inp2.value ? false : "disabled";
     }
 </script>
-    <p>
-    <input id="come_in"  value="Войти" type="button" size="1" class="btn btn-danger" disabled="disabled" onclick="location.href='admin'">
+    </p>
+    <input id="come_in" value="Войти" type="submit" size="1" class="btn btn-danger" formmethod="post"
+           disabled="disabled" onclick="location.href='admin'">
 
 {% endblock %}
