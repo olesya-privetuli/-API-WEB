@@ -4,9 +4,7 @@
 <h1>Участники</h1>
 {% for item in people%}
 <div class="col-md6 border rounded">
-    <div>
-        {{item.surname}} {{item.name}} {{item.fathername}}
-    </div>
+    <a href ="people_info">{{item.surname}} {{item.name}} {{item.fathername}}</a>
 </div>
 {% endfor %}
 {% endblock %}
