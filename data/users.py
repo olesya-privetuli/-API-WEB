@@ -3,7 +3,7 @@ from .db_session import SqlAlchemyBase
 
 
 class User(SqlAlchemyBase):
-    __tablename__ = 'users'
+    __tablename__ = 'people'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
@@ -14,6 +14,5 @@ class User(SqlAlchemyBase):
     about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     def __repr__(self):
-        return "{id} {name} {years_of_life} {about}".format(id=self.id, name=self.name,
-                                                            years_of_life=self.years_of_life, about=self.about)
+        return "{surname} {name} {fathername}".format(surname=self.surname, name=self.name, fathername=self.fathername)
 

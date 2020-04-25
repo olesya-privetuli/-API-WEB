@@ -2,9 +2,11 @@
 
 {% block content %}
 <h1>Участники</h1>
-{% for item in users%}
+{% for item in people%}
 <div class="col-md6 border rounded">
-    <h2>item.name</h2>
+    <div>
+        {{item.surname}} {{item.name}} {{item.fathername}}
+    </div>
 </div>
 {% endfor %}
 {% endblock %}

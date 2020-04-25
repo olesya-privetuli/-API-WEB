@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>itsme</title>
+    <title>Information</title>
 </head>
 <body>
-<form method="post">
-    </form>
+{% for item in people%}
+<div class="col-md6 border rounded">
+    <div>
+        <h1>{{item.surname}} {{item.name}} {{item.fathername}}</h1>
+    </div>
+</div>
 </body>
 </html>
+{% endfor %}

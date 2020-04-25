@@ -10,7 +10,6 @@ NAMES = []
 
 
 class LoginForm(FlaskForm):
-    # openid = TextField
     surname = StringField('Фамилия', validators=[DataRequired()])
     name = StringField('Имя', validators=[DataRequired()])
     fathername = StringField('Отчество', validators=[DataRequired()])
@@ -31,28 +30,21 @@ def login():
         return render_template('main.html', title='Поиск участников войны', form=form)
 
 
-@app.route('/people_info', methods=['GET', 'POST'])
+@app.route('/people_info', methods=['POST'])
 def people_info():
-    if request.method == 'GET':
-        return render_template("people_info.html")
-    elif request.method == 'POST':
-        print(request.form['name'])
-        print(request.form['surname'])
-        print(request.form['fathername'])
-        return render_template("people_info.html")
-
-
-@app.route('/all_members', methods=['GET', 'POST'])
-def all_members():
-    if request.method == 'GET':
+    if request.method == 'POST':
         session = db_session.create_session()
-        if len(NAMES) == 0:
-            for user in session.query(users.User).all():
-                NAMES.append(user.name)
+        peop = session.query(users.User).filter(users.User.name == request.form['name'],
+                                                users.User.surname == request.form['surname'],
+                                                users.User.fathername == request.form['fathername'])
+        return render_template("people_info.html", people=peop)
 
-        return render_template('all_members.html')
-    elif request.method == 'POST':
-        return render_template("all_members.html", title='Информация')
+
+@app.route('/all_members', methods=['POST'])
+def all_members():
+    session = db_session.create_session()
+    peop = session.query(users.User).all()
+    return render_template("all_members.html", people=peop)
 
 
 @app.route('/admin', methods=['POST', 'GET'])
@@ -68,5 +60,5 @@ def admin():
 
 
 if __name__ == '__main__':
-    db_session.global_init("db/blogs.sqlite")
+    db_session.global_init("db/people.sqlite")
     app.run(port=8080, host='127.0.0.1')
