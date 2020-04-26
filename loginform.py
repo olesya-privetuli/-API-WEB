@@ -30,16 +30,21 @@ def login():
         return render_template('main.html', title='Поиск участников войны', form=form)
 
 
-@app.route('/people_info', methods=['POST', 'GET'])
-def people_info(*ind):
+@app.route('/people_info', methods=['POST'])
+def people_info():
     session = db_session.create_session()
     if request.method == 'POST':
         peop = session.query(users.User).filter(users.User.name == ''.join(request.form['name'].split()),
                                                 users.User.surname == ''.join(request.form['surname'].split()),
                                                 users.User.fathername == ''.join(request.form['fathername'].split()))
         return render_template("people_info.html", people=peop)
-    elif request.method == 'GET':
-        peop = session.query(users.User).filter(users.User.id == ind)
+
+
+@app.route('/people_info/<int:id>', methods=['GET', 'POST'])
+def people_info1(id):
+    if request.method == 'GET':
+        session = db_session.create_session()
+        peop = session.query(users.User).filter(users.User.id == id)
         return render_template("people_info.html", people=peop)
 
 
