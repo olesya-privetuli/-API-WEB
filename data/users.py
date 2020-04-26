@@ -11,8 +11,6 @@ class User(SqlAlchemyBase):
     surname = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     fathername = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     years_of_life = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-
-    def __repr__(self):
-        return "{surname} {name} {fathername}".format(surname=self.surname, name=self.name, fathername=self.fathername)
+    grade = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    place_of_death = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
