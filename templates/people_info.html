@@ -11,9 +11,21 @@
         <h1>{{item.surname}} {{item.name}} {{item.fathername}}</h1>
         <h3>Годы жизни:</h3>{{item.years_of_life}}
         <h3>Звание:</h3>{{item.grade}}
-        <h3>Место смерти</h3>{{item.place_of_death}}
+        <h3>Место смерти:</h3>{{item.place_of_death}}
     </div>
 </div>
+<div id="map" style="width: 400px; height: 300px"></div>
+<script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+<script type="text/javascript">
+  var myMap;
+  ymaps.ready(init); // Ожидание загрузки API с сервера Яндекса
+  function init () {
+    myMap = new ymaps.Map("map", {
+      center: [55.76, 37.64], // Координаты центра карты
+      zoom: 7 // Zoom
+    });
+  }
+</script>
 </body>
 </html>
 {% endfor %}
