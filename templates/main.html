@@ -30,13 +30,18 @@
            class="btn btn-danger" onclick="location.href='all_members'">
     </form>
     <p>
+<form method="post" action="admin">
     <h5>Войти как администратор</h5>
     <h6>Логин</h6>
-    <input id='email' name="email" class="form-control" placeholder="Введите логин" formmethod="post"
+    <input id='email' name="email"  placeholder="Введите логин"
            type="email" size="45" onkeyup="checkParams()">
     <h6>Пароль</h6>
-    <input id="password" formmethod="post" name="password" class="form-control" placeholder="Введите пароль"
+    <input id="password" name="password" placeholder="Введите пароль"
            type="password" size="45" onkeyup="checkParams()">
+    <p></p>
+    <input id="come_in" value="Войти" type="submit" class="btn btn-danger"
+           disabled="disabled" onclick="location.href='admin'">
+</form>
     <p>
     <script>
     function checkParams() {
@@ -46,8 +51,6 @@
     }
 </script>
     </p>
-    <input id="come_in" value="Войти" type="submit" size="1" class="btn btn-danger" formmethod="post"
-           disabled="disabled" onclick="location.href='admin'">
 <p></p>
 <img src="static/img/line.jpg" width="1100" height="300">
 {% endblock %}

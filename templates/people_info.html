@@ -5,6 +5,8 @@
     <title>Information</title>
 </head>
 <body>
+{% if people %}
+<div>
 {% for item in people%}
 <div class="col-md6 border rounded">
     <div>
@@ -30,6 +32,12 @@
   }
 
 </script>
+{% endfor %}
+</div>
+{% else %}
+<div>
+    <h1>Данных не обнаружено</h1>
+</div>
+{% endif %}
 </body>
 </html>
-{% endfor %}

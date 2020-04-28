@@ -58,13 +58,10 @@ def all_members():
 @app.route('/admin', methods=['POST', 'GET'])
 def admin():
     if request.method == 'POST':
-        print(1)
-        a = request.form['password']
-        print(a)
-        return 'верно'
-    elif request.method == 'GET':
-        a = request.form['password']
-        print(a)
+        if request.form['password'] == 'olesya' and request.form['email'] == 'olessssskayooou@mail.ru':
+            return 'ok'
+        else:
+            return 'incorrect email or password'
 
 
 if __name__ == '__main__':
