@@ -14,17 +14,21 @@
         <h3>Место смерти:</h3>{{item.place_of_death}}
     </div>
 </div>
-<div id="map" style="width: 400px; height: 300px"></div>
+<div id="map" style="width: 900px; height: 500px"></div>
 <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
 <script type="text/javascript">
   var myMap;
   ymaps.ready(init); // Ожидание загрузки API с сервера Яндекса
   function init () {
     myMap = new ymaps.Map("map", {
-      center: [55.76, 37.64], // Координаты центра карты
-      zoom: 7 // Zoom
+      center: [55.76, 37.64],
+      zoom: 3 // Zoom
     });
+    ymaps.geoQuery(ymaps.regions.load("RU", {
+    lang: "ru"
+})).search('properties.hintContent = "{{item.place_of_death}}"').addToMap(myMap);
   }
+
 </script>
 </body>
 </html>
