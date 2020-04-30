@@ -1,12 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
-from flask import redirect, render_template, Flask, url_for, request
-import sqlalchemy.orm as orm
-from sqlalchemy.orm import Session
-import requests
+from flask import render_template, Flask, request
 from data import db_session, users
-NAMES = []
 
 
 class LoginForm(FlaskForm):
@@ -23,6 +19,9 @@ class AdminForm(FlaskForm):
     name = StringField('Имя', validators=[DataRequired()])
     fathername = StringField('Отчество', validators=[DataRequired()])
     add = SubmitField('Добавить')
+    years_of_life = StringField('Годы жизни', validators=[DataRequired()])
+    grade = StringField('Звание', validators=[DataRequired()])
+    place = StringField('Место смерти', validators=[DataRequired()])
 
 
 app = Flask(__name__)
@@ -55,10 +54,26 @@ def people_info1(id):
         return render_template("people_info.html", people=peop, title='Information')
 
 
+@app.route('/all_members_adding', methods=['POST', 'GET'])
+def all_members_adding():
+    if request.method == 'POST':
+        user = users.User()
+        user.name = request.form['name']
+        user.surname = request.form['surname']
+        user.fathername = request.form['fathername']
+        user.years_of_life = request.form['years_of_life']
+        user.place_of_death = request.form['place']
+        user.grade = request.form['grade']
+        session = db_session.create_session()
+        session.add(user)
+        session.commit()
+        peop = session.query(users.User).all()
+        return render_template("all_members.html", people=peop, title='Полный список')
+
+
 @app.route('/all_members', methods=['POST', 'GET'])
 def all_members():
     if request.method == 'POST':
-        print(request.form.get('name'))
         session = db_session.create_session()
         peop = session.query(users.User).all()
         return render_template("all_members.html", people=peop, title='Полный список')

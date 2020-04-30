@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Добавьте еще одного участника войны</h1>
-<form method="post" action="all_members">
+<form method="post" action="all_members_adding">
     {{ form.hidden_tag() }}
     <h5>Фамилия</h5>
     <input id="surname" name="surname" size="100" type="text" onkeyup="checkParamsforpeople()">
@@ -11,15 +11,15 @@
     <h5>Отчество</h5>
     <input id="fathername" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
     <h5>Годы жизни</h5>
-    <input id="years" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+    <input id="years_of_life" name="years_of_life" type="text" size="100" onkeyup="checkParamsforpeople()">
     <h5>Звание</h5>
-    <input id="grade" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+    <input id="grade" name="grade" type="text" size="100" onkeyup="checkParamsforpeople()">
     <h5>Место смерти</h5>
-    <input id="place" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+    <input id="place" name="place" type="text" size="100" onkeyup="checkParamsforpeople()">
 <p>
     </p>
 <input id="add" value="Добавить" type="submit"
-           class="btn btn-danger" disabled="disabled" onclick="location.href='all_members'">
+           class="btn btn-danger" disabled="disabled" onclick="location.href='all_members_adding'">
     </form>
 <script>
     function checkParamsforpeople() {
@@ -27,7 +27,7 @@
     inp2 = document.getElementById('name'),
     inp4 = document.getElementById('place'),
     inp5 = document.getElementById('grade'),
-    inp6 = document.getElementById('years'),
+    inp6 = document.getElementById('years_of_life'),
     inp3 = document.getElementById('fathername');
     document.getElementById('add').disabled = inp1.value && inp2.value && inp4.value && inp6.value && inp5.value && inp3.value ? false : "disabled";
     }
