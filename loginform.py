@@ -18,6 +18,13 @@ class LoginForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
 
 
+class AdminForm(FlaskForm):
+    surname = StringField('Фамилия', validators=[DataRequired()])
+    name = StringField('Имя', validators=[DataRequired()])
+    fathername = StringField('Отчество', validators=[DataRequired()])
+    add = SubmitField('Добавить')
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
@@ -45,21 +52,28 @@ def people_info1(id):
     if request.method == 'GET':
         session = db_session.create_session()
         peop = session.query(users.User).filter(users.User.id == id)
-        return render_template("people_info.html", people=peop)
+        return render_template("people_info.html", people=peop, title='Information')
 
 
-@app.route('/all_members', methods=['POST'])
+@app.route('/all_members', methods=['POST', 'GET'])
 def all_members():
-    session = db_session.create_session()
-    peop = session.query(users.User).all()
-    return render_template("all_members.html", people=peop)
+    if request.method == 'POST':
+        print(request.form.get('name'))
+        session = db_session.create_session()
+        peop = session.query(users.User).all()
+        return render_template("all_members.html", people=peop, title='Полный список')
+    elif request.method == 'GET':
+        session = db_session.create_session()
+        peop = session.query(users.User).all()
+        return render_template("all_members.html", people=peop, title='Полный список')
 
 
-@app.route('/admin', methods=['POST', 'GET'])
+@app.route('/admin', methods=['POST'])
 def admin():
     if request.method == 'POST':
         if request.form['password'] == 'olesya' and request.form['email'] == 'olessssskayooou@mail.ru':
-            return 'ok'
+            form = AdminForm()
+            return render_template("admin.html", form=form)
         else:
             return 'incorrect email or password'
 

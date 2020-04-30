@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<h1>Добавьте еще одного участника войны</h1>
+<form method="post" action="all_members">
+    {{ form.hidden_tag() }}
+    <h5>Фамилия</h5>
+    <input id="surname" name="surname" size="100" type="text" onkeyup="checkParamsforpeople()">
+    <h5>Имя</h5>
+    <input id="name" name='name' type="text" size="100" onkeyup="checkParamsforpeople()">
+    <h5>Отчество</h5>
+    <input id="fathername" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+    <h5>Годы жизни</h5>
+    <input id="years" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+    <h5>Звание</h5>
+    <input id="grade" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+    <h5>Место смерти</h5>
+    <input id="place" name="fathername" type="text" size="100" onkeyup="checkParamsforpeople()">
+<p>
+    </p>
+<input id="add" value="Добавить" type="submit"
+           class="btn btn-danger" disabled="disabled" onclick="location.href='all_members'">
+    </form>
+<script>
+    function checkParamsforpeople() {
+    var inp1 = document.getElementById('surname'),
+    inp2 = document.getElementById('name'),
+    inp4 = document.getElementById('place'),
+    inp5 = document.getElementById('grade'),
+    inp6 = document.getElementById('years'),
+    inp3 = document.getElementById('fathername');
+    document.getElementById('add').disabled = inp1.value && inp2.value && inp4.value && inp6.value && inp5.value && inp3.value ? false : "disabled";
+    }
+</script>
+{% endblock %}
